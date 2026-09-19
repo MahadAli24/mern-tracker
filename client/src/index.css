@@ -5,8 +5,8 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: #f4f4f5;
-  color: #1a1a1a;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
 form {
@@ -17,37 +17,95 @@ form {
   margin: 60px auto;
   padding: 24px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
 }
 
 input {
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   font-size: 14px;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
 }
 
 button {
   padding: 10px;
   border: none;
-  border-radius: 6px;
-  background: #4f46e5;
+  border-radius: 8px;
+  background: #0f766e;
   color: white;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 button:hover {
-  background: #4338ca;
+  background: #115e59;
 }
+
 .dashboard {
-  max-width: 480px;
+  max-width: 520px;
   margin: 60px auto;
-  padding: 24px;
+  padding: 28px;
   background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+.dashboard h2 {
+  margin-top: 0;
+}
+
+.stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  background: #ccfbf1;
+  color: #0f766e;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-select {
+  padding: 8px 12px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 8px 14px;
+}
+
+.logout-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
 }
 
 .add-form {
@@ -74,14 +132,14 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  border: 1px solid #eee;
-  border-radius: 6px;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
 }
 
 .task-title.completed {
   text-decoration: line-through;
-  color: #999;
+  color: #94a3b8;
 }
 
 .task-actions {
@@ -95,32 +153,9 @@ button:hover {
 }
 
 .delete-btn {
-  background: #ef4444;
+  background: #dc2626;
 }
 
 .delete-btn:hover {
-  background: #dc2626;
-}
-.logout-btn {
-  background: #6b7280;
-  margin-bottom: 16px;
-}
-
-.logout-btn:hover {
-  background: #4b5563;
-}
-.stats {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.stat-pill {
-  background: #eef2ff;
-  color: #4f46e5;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
+  background: #b91c1c;
 }
