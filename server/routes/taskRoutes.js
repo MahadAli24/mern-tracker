@@ -20,6 +20,20 @@ router.get('/', auth, async (req, res) => {
   res.json(tasks);
 });
 
+// STATS
+router.get('/stats/summary', auth, async (req, res) => {
+  const mongoose = require('mongoose');
+  const stats = await Task.aggregate([
+    { $match: { user: new mongoose.Types.ObjectId(req.userId) } },
+    { $group: {
+        _id: '$category',
+        total: { $sum: 1 },
+        completed: { $sum: { $cond: ['$completed', 1, 0] } },
+    }},
+  ]);
+  res.json(stats);
+});
+
 // READ one
 router.get('/:id', auth, async (req, res) => {
   const task = await Task.findById(req.params.id);
