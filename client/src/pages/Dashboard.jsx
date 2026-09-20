@@ -75,6 +75,9 @@ export default function Dashboard() {
           <option value="reading">Reading</option>
           <option value="work">Work</option>
         </select>
+        <button onClick={() => navigate("/notes")} className="logout-btn">
+          Notes →
+        </button>
         <button onClick={handleLogout} className="logout-btn">
           Logout
         </button>
