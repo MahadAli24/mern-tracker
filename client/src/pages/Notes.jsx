@@ -6,6 +6,7 @@ export default function Notes() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
   const fetchNotes = async () => {
     const { data } = await API.get("/notes");
@@ -28,34 +29,43 @@ export default function Notes() {
   };
 
   return (
-    <div className="notes">
-      <h2> MY NOTES </h2>
-      <form onSubmit={addNote} className="add-form">
+    <div className="dashboard">
+      <div className="toolbar">
+        <h2>My Notes</h2>
+        <button onClick={() => navigate("/dashboard")} className="logout-btn">
+          ← Back to Tasks
+        </button>
+      </div>
+      <form onSubmit={addNote} className="note-form">
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="New Note"
+          placeholder="Note title"
         />
-        <input
+        <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="content of note"
+          placeholder="Write something..."
+          rows={3}
         />
-        <button type="submit">Add</button>
+        <button type="submit">Add Note</button>
       </form>
-      <ul className="task-list">
+      <div className="note-grid">
         {notes.map((n) => (
-          <li key={n._id} className="task-item">
-            <div>
+          <div key={n._id} className="note-card">
+            <div className="note-card-header">
               <strong>{n.title}</strong>
-              <p>{n.content}</p>
+              <button
+                onClick={() => deleteNote(n._id)}
+                className="delete-btn small"
+              >
+                ✕
+              </button>
             </div>
-            <button onClick={() => deleteNote(n._id)} className="delete-btn">
-              ✕
-            </button>
-          </li>
+            <p>{n.content}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
