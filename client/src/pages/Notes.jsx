@@ -6,6 +6,7 @@ export default function Notes() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [editingId, setEditingId] = useState(null);
   const navigate = useNavigate();
 
   const fetchNotes = async () => {
@@ -16,9 +17,14 @@ export default function Notes() {
     fetchNotes();
   }, []);
 
-  const addNote = async (e) => {
+  const saveNote = async (e) => {
     e.preventDefault();
-    await API.post("/notes", { title, content });
+    if (editingId) {
+      await API.put(`/notes/${editingId}`, { title, content });
+      setEditingId(null);
+    } else {
+      await API.post("/notes", { title, content });
+    }
     setTitle("");
     setContent("");
     fetchNotes();
@@ -28,6 +34,11 @@ export default function Notes() {
     fetchNotes();
   };
 
+  const startEdit = (note) => {
+    setTitle(note.title);
+    setContent(note.content);
+    setEditingId(note._id);
+  };
   return (
     <div className="dashboard">
       <div className="toolbar">
@@ -36,7 +47,7 @@ export default function Notes() {
           ← Back to Tasks
         </button>
       </div>
-      <form onSubmit={addNote} className="note-form">
+      <form onSubmit={saveNote} className="note-form">
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -48,13 +59,16 @@ export default function Notes() {
           placeholder="Write something..."
           rows={3}
         />
-        <button type="submit">Add Note</button>
+        <button type="submit">{editingId ? "Update Note" : "Add Note"}</button>
       </form>
       <div className="note-grid">
         {notes.map((n) => (
           <div key={n._id} className="note-card">
             <div className="note-card-header">
               <strong>{n.title}</strong>
+              <button onClick={() => startEdit(n)} className="edit-btn small">
+                Edit
+              </button>
               <button
                 onClick={() => deleteNote(n._id)}
                 className="delete-btn small"

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const taskSchema = new mongoose.Schema(
+const noteSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     content: { type: String, default: "general" },
@@ -9,4 +9,4 @@ const taskSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-module.exports = mongoose.model("Note", taskSchema);
+module.exports = mongoose.model("Note", noteSchema);
