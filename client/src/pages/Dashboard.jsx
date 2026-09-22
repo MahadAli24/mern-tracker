@@ -8,6 +8,7 @@ export default function Dashboard() {
   const [stats, setStats] = useState([]);
   const [filter, setFilter] = useState("all");
   const [category, setCategory] = useState("general");
+  const [dueDate, setDueDate] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,8 +34,10 @@ export default function Dashboard() {
 
   const addTask = async (e) => {
     e.preventDefault();
-    await API.post("/tasks", { title, category });
+    await API.post("/tasks", { title, category, dueDate });
     setTitle("");
+    setCategory("general");
+    setDueDate("");
     fetchTasks();
     fetchStats();
   };
@@ -97,6 +100,11 @@ export default function Dashboard() {
           <option value="reading">Reading</option>
           <option value="work">Work</option>
         </select>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
         <button type="submit">Add</button>
       </form>
       <ul className="task-list">
