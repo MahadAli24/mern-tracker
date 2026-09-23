@@ -117,7 +117,7 @@ export default function Dashboard() {
             </span>
             {t.dueDate ? (
               <span className="due-date">
-                Due: {t.dueDate.toLocaleDateString()}
+                Due: {new Date(t.dueDate).toLocaleDateString()}
               </span>
             ) : null}
             <div className="task-actions">
