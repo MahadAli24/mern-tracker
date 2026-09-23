@@ -115,6 +115,11 @@ export default function Dashboard() {
             >
               {t.title}
             </span>
+            {t.dueDate ? (
+              <span className="due-date">
+                Due: {t.dueDate.toLocaleDateString()}
+              </span>
+            ) : null}
             <div className="task-actions">
               <button onClick={() => toggleComplete(t)}>✓</button>
               <button onClick={() => deleteTask(t._id)} className="delete-btn">
