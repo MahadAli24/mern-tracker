@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [filter, setFilter] = useState("all");
   const [category, setCategory] = useState("general");
   const [dueDate, setDueDate] = useState("");
+  const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
 
@@ -54,8 +55,11 @@ export default function Dashboard() {
     fetchStats();
   };
 
-  const filteredTasks =
-    filter === "all" ? tasks : tasks.filter((t) => t.category === filter);
+  const filteredTasks = tasks.filter((t) => {
+    const matchesCategory = filter === "all" || t.category === filter;
+    const matchesSearch = t.title.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="dashboard">
@@ -68,6 +72,12 @@ export default function Dashboard() {
         ))}
       </div>
       <div className="toolbar">
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search tasks..."
+          className="filter-select"
+        />
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
@@ -79,7 +89,7 @@ export default function Dashboard() {
           <option value="work">Work</option>
         </select>
         <button onClick={() => navigate("/notes")} className="logout-btn">
-          Notes →
+          Notes
         </button>
         <button onClick={handleLogout} className="logout-btn">
           Logout
